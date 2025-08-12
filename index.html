@@ -76,13 +76,17 @@
         .logo-section img {
             height: 60px;
             width: auto;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .logo-section img:hover {
-            transform: scale(1.1);
-            filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            transform: scale(1.1) translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .project-title {
@@ -450,6 +454,9 @@
 
             .logo-section img {
                 height: 50px;
+                background: rgba(255, 255, 255, 0.2);
+                padding: 8px;
+                border-radius: 10px;
             }
 
             .project-title {
@@ -507,6 +514,11 @@
             nav ul {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            .logo-section img {
+                height: 45px;
+                padding: 6px;
             }
 
             .overview-content,
@@ -718,15 +730,22 @@
             });
         });
 
-        // Add loading state for images
+        // Add image loading optimization
         document.querySelectorAll('img').forEach(img => {
             img.addEventListener('load', function() {
                 this.style.opacity = '1';
+                this.style.transform = 'scale(1)';
             });
+            
+            img.addEventListener('error', function() {
+                this.style.opacity = '0.5';
+                this.alt = 'Logo not found';
+            });
+            
             img.style.opacity = '0';
-            img.style.transition = 'opacity 0.3s ease';
+            img.style.transform = 'scale(0.95)';
+            img.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         });
     </script>
 </body>
 </html>
-
